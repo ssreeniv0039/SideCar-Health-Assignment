@@ -47,11 +47,11 @@ public class Expedia1 {
 
 		// Click on departing date field and select the date
 		driver.findElement(By.xpath("//button[@id='d1-btn']")).click();
-		extractedDate(driver, "October 2020", "23");
+		extractedDate(driver, "October 2020", "16");
 
 		// Click on returning date filed and select the date
 		driver.findElement(By.xpath("//button[@id='d2-btn']")).click();
-		extractedDate(driver, "October 2020", "25");
+		extractedDate(driver, "October 2020", "18");
 
 		// On clicking search button, the select your departure flight page is displayed
 		driver.findElement(By.xpath("//button[contains(text(),'Search')]")).click();
@@ -66,17 +66,17 @@ public class Expedia1 {
 		// Since the price is sorted by default from low to high, I will select the
 		// first element.
 		// Click on the first element Select button
-		WebDriverWait wait = new WebDriverWait(driver, 15);
+		WebDriverWait wait = new WebDriverWait(driver, 20);
 		WebElement selectCard = driver.findElement(By.xpath("//li[@data-test-id = 'offer-listing'][1]"));
 		wait.until(ExpectedConditions
-				.elementToBeClickable(selectCard.findElement(By.xpath("//button[@data-test-id= 'select-button']"))))
+				.elementToBeClickable(selectCard.findElement(By.xpath(".//button[@data-test-id= 'select-button']"))))
 				.click();
-		dismissPopUp(driver);
 
 		// On clicking select button, the select your return to Los Angeles page is
 		// displayed
+		dismissPopUp(driver);
 		wait.until(ExpectedConditions
-				.elementToBeClickable(selectCard.findElement(By.xpath("//button[@data-test-id= 'select-button-1']"))))
+				.elementToBeClickable(selectCard.findElement(By.xpath(".//button[@data-test-id= 'select-button-1']"))))
 				.click();
 
 		// Screen2
@@ -88,7 +88,7 @@ public class Expedia1 {
 		// Click on the first element Select button
 		WebElement selectCard1 = driver.findElement(By.xpath("//li[@data-test-id = 'offer-listing'][1]"));
 		wait.until(ExpectedConditions
-				.elementToBeClickable(selectCard1.findElement(By.xpath("//button[@data-test-id= 'select-button']"))))
+				.elementToBeClickable(selectCard1.findElement(By.xpath(".//button[@data-test-id= 'select-button']"))))
 				.click();
 
 		// On clicking add hotels button, a combination price list of the hotels + flight charge is displayed
@@ -105,10 +105,11 @@ public class Expedia1 {
 		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
-		List<WebElement> priceList = driver
-				.findElements(By.xpath("//ul[@class = 'hotel-price']//li[contains(@class, 'actualPrice')]"));
-		for (WebElement price : priceList) {
-			System.out.println(price.getText());
+		List<WebElement> articles = driver.findElements(By.xpath("//div[@id = 'resultsContainer']//article"));
+		for (WebElement article : articles) {
+			String hotelName = article.findElement(By.xpath(".//h4[@data-automation='hotel-name']")).getText();
+			String hotelPrice = article.findElement(By.xpath(".//ul[@class = 'hotel-price']//li[contains(@class, 'actualPrice')]")).getText();
+			System.out.println(hotelName + "\t" + hotelPrice);
 		}
 
 		driver.close();
