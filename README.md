@@ -8,11 +8,11 @@ Constraint 2: Arrival from Las Vegas to Los Angeles should be before Sunday mid 
 
 TestCase1: when dates are set from 23rd to 25th October,2020
 Result:Comparing the list of prices
-$609
-$583
-$543
-$543
-$684
+Wynn Las Vegas	                  $583
+The Venetian Resort Las Vegas	    $517
+ARIA Resort & Casino	            $550
+The Palazzo at The Venetian	      $517
+Caesars Palace - Resort & Casino	$542
 
 
 TestCase2: when dates are set from 16th to 18th October,2020
